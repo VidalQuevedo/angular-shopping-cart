@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-body">
+    <div *ngFor="let item of (items$ | async)" class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-3">
+            <img class="img-fluid" src="https://via.placeholder.com/175" alt="sample image">
+          </div>
+          <div class="col-7">
+            <h5>{{item.sku.title}}</h5>
+            <small class="text-success">In Stock</small>
+            <ul class="nav">
+              <li class="nav-item">
+                <select class="form-select" aria-label="quantity">
+                  <option selected value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </li>
+              <li class="nav-item ms-4">
+                <small><button class="btn btn-link" aria-current="delete-button">Delete</button></small>
+              </li>
+            </ul>
+          </div>
+          <div class="col-2">
+            <p class="h5 text-end">{{item.sku.price | currency:'USD':'symbol':'.2'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="(items$ | async)?.length === 0">Your shopping cart is empty.</div>
+  </div>
+</div>
