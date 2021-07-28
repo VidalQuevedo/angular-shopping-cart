@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { ShoppingCart } from '../models';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Item, ShoppingCart } from '../models';
+import { pluck } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,10 @@ export class ShoppingCartService {
     });
   }
 
+  getItems(): Observable<Item[]> {
+    return this.shoppingCart$.pipe(
+      pluck('items')
+    );
+  }
 
 }
