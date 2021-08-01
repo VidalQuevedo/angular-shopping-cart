@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Item, ShoppingCart } from '../models';
-import { pluck } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,28 @@ export class ShoppingCartService {
   getItems(): Observable<Item[]> {
     return this.shoppingCart$.pipe(
       pluck('items')
+    );
+  }
+
+  getSubTotal(): Observable<number> {
+    return this.shoppingCart$.pipe(
+      map((shoppingCart) => {
+        const subTotal = shoppingCart?.items
+          .map((item) => item.quantity * item.sku.price)
+          .reduce((p, c) => p + c, 0);
+        return subTotal;
+      })
+    );
+  }
+
+  getCount(): Observable<number> {
+    return this.shoppingCart$.pipe(
+      map((shoppingCart) => {
+        const count = shoppingCart.items
+          .map((item) => item.quantity)
+          .reduce((p, c) => p + c, 0);
+        return count;
+      })
     );
   }
 
