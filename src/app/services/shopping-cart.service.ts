@@ -54,4 +54,13 @@ export class ShoppingCartService {
     );
   }
 
+  updateQuantity(updateQuantity: number, updateItem: Item) {
+    const shoppingCart = { ...this.shoppingCart$.value };
+    shoppingCart.items = shoppingCart.items.map((item) => {
+      item.quantity = item.id === updateItem.id ? +updateQuantity : item.quantity;
+      return item;
+    });
+    this.shoppingCart$.next(shoppingCart);
+  }
+
 }

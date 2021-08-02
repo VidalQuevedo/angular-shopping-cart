@@ -11,7 +11,7 @@
             <small class="text-success">In Stock</small>
             <ul class="nav">
               <li class="nav-item">
-                <select class="form-select" aria-label="quantity">
+                <select class="form-select" aria-label="quantity" (change)="updateQuantity($event, item)">
                   <option selected value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
