@@ -24,4 +24,8 @@ export class ItemsComponent implements OnInit {
     const quantity = ($event as any)?.target?.value;
     this.shoppingCartService.updateQuantity(quantity, item);
   }
+  
+  deleteItem(item: Item) {
+    this.shoppingCartService.deleteItem(item);
+  }
 }

@@ -63,4 +63,10 @@ export class ShoppingCartService {
     this.shoppingCart$.next(shoppingCart);
   }
 
+  deleteItem(deleteItem: Item) {
+    const shoppingCart = { ...this.shoppingCart$.value };
+    shoppingCart.items = shoppingCart.items.filter((item) => deleteItem.id !== item.id);
+    this.shoppingCart$.next(shoppingCart);
+  }
+
 }
