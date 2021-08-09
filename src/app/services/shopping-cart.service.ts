@@ -22,13 +22,17 @@ export class ShoppingCartService {
     this.getShoppingCart(); 
   }
 
-  getShoppingCart() {
-    this.httpClient.get<ShoppingCart>('/assets/data.json').subscribe((data) => {
-      this.shoppingCart$.next(data);
+  private getShoppingCart() {
+    this.httpClient.get<ShoppingCart>('/assets/data.json').subscribe((shoppingCart) => {
+      this.setShoppingCart(shoppingCart);
     },
     () => {
       console.error('Shopping cart data could not be loaded.');
     });
+  }
+
+  private setShoppingCart(shoppingCart: ShoppingCart) {
+    this.shoppingCart$.next(shoppingCart);
   }
 
   getItems(): Observable<Item[]> {
@@ -65,13 +69,13 @@ export class ShoppingCartService {
       item.quantity = item.id === updateItem.id ? +updateQuantity : item.quantity;
       return item;
     });
-    this.shoppingCart$.next(shoppingCart);
+    this.setShoppingCart(shoppingCart);
   }
 
   deleteItem(deleteItem: Item) {
     const shoppingCart = { ...this.shoppingCart$.value };
     shoppingCart.items = shoppingCart.items.filter((item) => deleteItem.id !== item.id);
-    this.shoppingCart$.next(shoppingCart);
+    this.setShoppingCart(shoppingCart);
   }
 
 }
