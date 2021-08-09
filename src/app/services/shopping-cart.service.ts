@@ -9,12 +9,17 @@ import { map, pluck } from 'rxjs/operators';
 })
 export class ShoppingCartService {
 
-  private shoppingCart$ = new BehaviorSubject<ShoppingCart>({ id: '', items: [], subTotal: 0 }); // Initializes shopping cart with default value
+  private shoppingCart$: BehaviorSubject<ShoppingCart>;
 
   constructor(
     private httpClient: HttpClient
   ) {
-   this.getShoppingCart(); 
+   
+     // Initialize shopping cart with default value
+    this.shoppingCart$ = new BehaviorSubject<ShoppingCart>({ id: '', items: [], subTotal: 0 });
+
+    // Load shopping cart data
+    this.getShoppingCart(); 
   }
 
   getShoppingCart() {
