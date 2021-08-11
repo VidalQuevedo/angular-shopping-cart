@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-4">
   <div class="card-body">
     <div *ngFor="let item of (items$ | async)" class="card mb-3">
       <div class="card-body">
@@ -6,7 +6,7 @@
           <div class="col-3">
             <img class="img-fluid" src="https://via.placeholder.com/175" alt="sample image">
           </div>
-          <div class="col-7">
+          <div class="col-6 col-md-7">
             <h5>{{item.sku.title}}</h5>
             <small class="text-success">In Stock</small>
             <ul class="nav">
@@ -22,8 +22,8 @@
               </li>
             </ul>
           </div>
-          <div class="col-2">
-            <p class="h5 text-end">{{item.sku.price | currency:'USD':'symbol':'.2'}}</p>
+          <div class="col-3 col-md-2">
+            <p class="h5 text-end text-nowrap">{{item.sku.price | currency:'USD':'symbol':'.2'}}</p>
           </div>
         </div>
       </div>

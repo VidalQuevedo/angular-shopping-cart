@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mb-4">
   <div class="card-body">
     <p>Subtotal ({{count$ | async}} items): {{subTotal$ | async | currency:'USD':'symbol':'.2'}}</p>
     <button class="btn btn-warning" [disabled]="(count$ | async) === 0">Proceed to Checkout</button>
